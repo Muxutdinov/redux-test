@@ -18,6 +18,18 @@ const cantactReducer = (state = initialState, action) => {
     case "ADD_CONTACT":
       state = [...state, action.payload];
       return state;
+    case "UPDATE":
+      const updateState = state.map((value) =>
+        value.id === action.payload.id ? action.payload : value
+      );
+      state = updateState;
+      return state;
+    case "DELETE":
+      const filtered = state.filter(
+        (value) => value.id !== action.payload && value
+      );
+      state = filtered;
+      return state;
     default:
       return state;
   }
